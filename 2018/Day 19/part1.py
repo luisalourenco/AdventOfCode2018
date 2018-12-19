@@ -115,9 +115,7 @@ def eqrr(registers, A, B, C):
 	A = offset_reg(A, ip_reg)
 	B = offset_reg(B, ip_reg)
 	C = offset_reg(C, ip_reg)
-	print(A)
-	print(B)
-	print(C)
+
 	if registers[A] == registers[B]:
 		registers[C] = 1
 	else:
@@ -129,14 +127,14 @@ def offset_reg(reg, ip_reg):
 	return reg
 
 
-filepath = 'test.txt' 
+filepath = 'input.txt' 
 count = 0
-registers = [0,0,0,0,0,0] # A, B, IP, C, D
+registers = [1,0,0,0,0,0] # part 2, change register 0 to value 1
 operations = []
 with open(filepath) as fp:
 
 	ip_reg  = int(fp.readline().split()[1])
-	ip = ip_reg
+	
 	operation = fp.readline()
 
 	while operation:
@@ -147,7 +145,12 @@ with open(filepath) as fp:
 		operation = fp.readline()
 	#end while
 
+	i = 0
+	ip = registers[ip_reg]
 	while ip < len(operations)-1:
+
+		#print("before: ",registers)
+
 		operation = operations[ip]
 		A = int(operation[1])
 		B = int(operation[2])
@@ -156,13 +159,12 @@ with open(filepath) as fp:
 		op_code = operation[0]	
 
 		#before
-		registers[ip_reg] = ip
-	
+		registers[ip_reg] = ip	
 	
 		if op_code == "addr":
 			addr(registers, A, B, C)
 		if op_code == "mulr":
-			print(operation)
+			#print(operation)
 			mulr(registers, A, B, C)
 		if op_code == "banr":
 			banr(registers, A, B, C)
@@ -177,7 +179,7 @@ with open(filepath) as fp:
 		if op_code == "gtri":
 			gtri(registers, A, B, C)
 		if op_code == "eqrr":
-			print(operation)
+			#print(operation)
 			eqrr(registers, A, B, C)
 		if op_code == "addi":
 			addi(registers, A, B, C)
@@ -196,8 +198,11 @@ with open(filepath) as fp:
 	
 		ip = registers[ip_reg]
 		ip += 1
-		print(registers)
+		i += 1
+		#print(registers)
 	#end for
+	print(ip)
+	print(i)
 	print(registers)
 	print(registers[0])
 
