@@ -64,7 +64,7 @@ i = 0
 with open(filepath) as fp:
 
 	data = fp.readline().strip()	
-	s = len(data)
+	s = 10
 
 	area = [ ['.'] * s for n in range(s)]
 	while data:
@@ -75,10 +75,12 @@ with open(filepath) as fp:
 	print_map(area)
 	#print(area[1][6])
 	#print(countLumberyards(1,6, area))
-	
+	import copy
 	result = [ ['.'] * s for n in range(s)]
-	for _ in range(10):
 	
+	for _ in range(10):
+		
+		#result = copy.deepcopy(area)
 		for i in range(s):
 			for j in range(s):
 				#print "checking area ",i,",",j,": ", area[i][j]
@@ -95,8 +97,9 @@ with open(filepath) as fp:
 					#print "Become empty!"
 					result[i][j] = "."
 		#end for
-		import copy
+		
 		area = copy.deepcopy(result)
+			
 		#result = [ ['.'] * s for n in range(s)]
 	#end for
 	trees = 0
