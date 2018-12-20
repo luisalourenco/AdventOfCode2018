@@ -1,4 +1,4 @@
-filepath = 'test.txt' 
+filepath = 'input.txt' 
 
 def print_map(m):
 	i = 0
@@ -50,7 +50,9 @@ def countLumberyards(i, j, area):
 	elif i == 0 and j == 0 and j < size:
 		count = int(area[i][j+1] == "#") + int(area[i+1][j] == "#") + int(area[i+1][j+1] == "#")
 	elif i > 0 and j == 0 and i < size:
-		count =  int(area[i][j+1] == "#") + int(area[i+1][j] == "#") + int(area[i+1][j+1] == "#") + int(area[i-1][j] == "#") + int(area[i-1][j+1] == "#") + int(area[i][j+1] == "#") + int(area[i+1][j] == "#") + int(area[i+1][j+1] == "#")
+		count =  int(area[i][j+1] == "#") + int(area[i+1][j] == "#") +int(area[i+1][j+1] == "#") + int(area[i-1][j] == "#") +int(area[i-1][j+1] == "#") 
+ 
+	
 	elif i == size and j == size:
 		count = int(area[i-1][j] == "#") + int(area[i-1][j-1] == "#") + int(area[i][j-1] == "#")
 	elif i == size and j < size and j > 0:
@@ -66,7 +68,7 @@ i = 0
 with open(filepath) as fp:
 
 	data = fp.readline().strip()	
-	s = 10
+	s = 50
 
 	area = [ ['.'] * s for n in range(s)]
 	result = [ ['.'] * s for n in range(s)]
@@ -75,13 +77,18 @@ with open(filepath) as fp:
 		i += 1
 		data = fp.readline().strip()
 
-	print_map(area)
+	#print_map(area)
 	#print(area[1][6])
 	#print(countLumberyards(1,6, area))
 	import copy
 
+	part1 = 10
+	part2 = 1000000000
+	test = 1400
 
-	for p in range(10):
+
+
+	for p in range(test):
 		
 		for i in range(s):
 			for j in range(s):
@@ -104,11 +111,11 @@ with open(filepath) as fp:
 				elif area[i][j] == "#" and (countLumberyards(i, j, area) < 1 or countTrees(i, j, area) < 1):
 					result[i][j] = "."
 		#end for
-		print "-------", p,"--------"
-		print countTrees(5,0,area)
+		#print "-------", p,"--------"
+		#print countTrees(5,0,area)
 
-		print area[5]
-		print_map(result)
+		#print area[5]
+		#print_map(result)
 
 		area = copy.deepcopy(result)
 			
@@ -120,10 +127,12 @@ with open(filepath) as fp:
 		lumb += s.count("#")
 		trees += s.count("|")
 
-	print "---------------"
-	print_map(result)
+	#print "---------------"
+	#print_map(result)
+	print test
 	print trees
 	print lumb
 	print trees * lumb
+	print ""
 
 	

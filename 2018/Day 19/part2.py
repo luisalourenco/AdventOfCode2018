@@ -150,4 +150,5 @@ with open(filepath) as fp:
 	print(operations[ip])
 	print(registers)
 	print(registers[0])
+	print ""
 
