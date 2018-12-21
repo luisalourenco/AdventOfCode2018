@@ -84,7 +84,7 @@ with open(filepath) as fp:
 
 	part1 = 10
 	part2 = 1000000000
-	test = 1400
+	test = 1700
 
 
 

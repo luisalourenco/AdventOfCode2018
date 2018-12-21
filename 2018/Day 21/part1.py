@@ -18,19 +18,19 @@ def muli(registers, A, B, C):
 
 #banr (bitwise AND register) stores into register C the result of the bitwise AND of register A and register B.
 def banr(registers, A, B, C):
-	registers[C] = registers[A] & registers[B]
+	registers[C] = int(registers[A]) & int(registers[B])
 
 #bani (bitwise AND immediate) stores into register C the result of the bitwise AND of register A and value B.
 def bani(registers, A, B, C):
-	registers[C] = registers[A] & B
+	registers[C] = int(registers[A]) & int(B)
 
 #borr (bitwise OR register) stores into register C the result of the bitwise OR of register A and register B.
 def borr(registers, A, B, C):
-	registers[C] = registers[A] | registers[B]
+	registers[C] = int(registers[A]) | int(registers[B])
 
 #bori (bitwise OR immediate) stores into register C the result of the bitwise OR of register A and value B.
 def bori(registers, A, B, C):
-	registers[C] = registers[A] | B
+	registers[C] = int(registers[A]) | B
 
 #setr (set register) copies the contents of register A into register C. (Input B is ignored.)
 def setr(registers, A, B, C):
@@ -88,7 +88,7 @@ instructions = {'mulr': mulr, 'addr': addr, 'banr': banr, 'eqir': eqir, 'muli': 
 
 filepath = 'input.txt' 
 count = 0
-registers = [0,0,0,0,0,0] # part 2, change register 0 to value 1
+registers = [10,0,0,0,0,0] # part 2, change register 0 to value 1
 operations = []
 with open(filepath) as fp:
 
@@ -132,6 +132,7 @@ with open(filepath) as fp:
 		ip += 1
 		i += 1
 
+		print(i, ": ",registers[0])
 		#if i > s-15:
 			#print(i, ": ",operations[ip])
 			#print(i, ": ",registers)
