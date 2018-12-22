@@ -88,8 +88,11 @@ instructions = {'mulr': mulr, 'addr': addr, 'banr': banr, 'eqir': eqir, 'muli': 
 
 filepath = 'input.txt' 
 count = 0
-registers = [10,0,0,0,0,0] # part 2, change register 0 to value 1
+#init = 2
+
+
 operations = []
+limit = 1000000
 with open(filepath) as fp:
 
 	ip_reg  = int(fp.readline().split()[1])
@@ -104,40 +107,49 @@ with open(filepath) as fp:
 		operation = fp.readline()
 	#end while
 
-	i = 0
-	ip = registers[ip_reg]
+	init_val = 500000
+	for init in range(init_val):
 
-	s= 100000
-	#for _ in range(s):
-	while ip < len(operations):
-
-		#print("before: ",registers)
-
-		operation = operations[ip]
-
-		A = int(operation[1])
-		B = int(operation[2])
-		C = int(operation[3])
-
-		op_code = operation[0]	
-
-		# before, store ip
-		registers[ip_reg] = ip	
-
-		# execute instruction	
-		instructions[op_code](registers, A, B, C)
-		
-		#after, load ip
+		registers = [init,0,0,0,0,0] # part 2, change register 0 to value 1
+		i = 0
 		ip = registers[ip_reg]
-		ip += 1
-		i += 1
 
-		print(i, ": ",registers[0])
-		#if i > s-15:
-			#print(i, ": ",operations[ip])
-			#print(i, ": ",registers)
-	#end for
-	print(ip)
-	print(registers)
-	print(registers[0])
+		#s= 100000
+		#for _ in range(s):
+		while ip < len(operations):
 
+			#print("before: ",registers)
+
+			operation = operations[ip]
+
+			A = int(operation[1])
+			B = int(operation[2])
+			C = int(operation[3])
+
+			op_code = operation[0]	
+
+			# before, store ip
+			registers[ip_reg] = ip	
+
+			# execute instruction	
+			instructions[op_code](registers, A, B, C)
+			
+			#after, load ip
+			ip = registers[ip_reg]
+			ip += 1
+			i += 1
+
+
+			if i > limit:
+				break
+			#print(i, ": ",registers[0])
+			#if i > s-15:
+				#print(i, ": ",operations[ip])
+				#print(i, ": ",registers)
+		#end for
+		if i < limit:
+			print(init, " halted after cycles: ", i)
+		#print(registers)
+		#print(registers[0])
+
+	print("done")
